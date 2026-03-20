@@ -1,0 +1,6 @@
+{
+  "extends": "next/core-web-vitals",
+  "compilerOptions": {
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  }
+}
