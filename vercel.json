@@ -3,13 +3,6 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "regions": ["iad1"],
-  "env": {
-    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "@stripe-publishable-key",
-    "STRIPE_SECRET_KEY": "@stripe-secret-key",
-    "WORDPRESS_API_URL": "@wordpress-api-url",
-    "WORDPRESS_CONSUMER_KEY": "@wordpress-consumer-key",
-    "WORDPRESS_CONSUMER_SECRET": "@wordpress-consumer-secret"
-  },
   "headers": [
     {
       "source": "/api/(.*)",
