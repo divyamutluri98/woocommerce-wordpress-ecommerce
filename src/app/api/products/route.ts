@@ -24,8 +24,27 @@ export async function GET(request: Request) {
     filteredProducts = filteredProducts.filter(
       (p) =>
         p.name.toLowerCase().includes(query) ||
-        p.description.toLowerCase().includes(query)
+        p.description.toLowerCase().includes(query) ||
+        p.shortDescription.toLowerCase().includes(query)
     );
+  }
+
+  const sort = searchParams.get('sort');
+  if (sort) {
+    switch (sort) {
+      case 'price-asc':
+        filteredProducts.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-desc':
+        filteredProducts.sort((a, b) => b.price - a.price);
+        break;
+      case 'newest':
+        filteredProducts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        break;
+      case 'name':
+        filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+    }
   }
 
   if (featured) {
