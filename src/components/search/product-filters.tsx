@@ -198,14 +198,14 @@ export default function ProductFilters({ onFilterChange, categories }: ProductFi
           <label className="flex items-center gap-2 cursor-pointer">
             <Checkbox
               checked={filters.inStock}
-              onCheckedChange={(checked) => updateFilter('inStock', checked)}
+              onCheckedChange={(checked: boolean) => updateFilter('inStock', checked)}
             />
             <span className="text-sm">In Stock Only</span>
           </label>
           <label className="flex items-center gap-2 cursor-pointer">
             <Checkbox
               checked={filters.onSale}
-              onCheckedChange={(checked) => updateFilter('onSale', checked)}
+              onCheckedChange={(checked: boolean) => updateFilter('onSale', checked)}
             />
             <span className="text-sm">On Sale</span>
           </label>

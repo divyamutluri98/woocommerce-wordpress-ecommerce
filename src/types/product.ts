@@ -59,11 +59,8 @@ export type StockStatus = 'instock' | 'outofstock' | 'onbackorder';
 export interface CartItem {
   id: string;
   productId: string;
-  name: string;
-  price: number;
   quantity: number;
-  image?: string;
-  maxQuantity?: number;
+  product: Product;
 }
 
 export interface Cart {
