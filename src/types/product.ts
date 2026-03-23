@@ -3,13 +3,13 @@ export interface Product {
   name: string;
   slug: string;
   description: string;
-  shortDescription: string;
+  shortDescription?: string;
   price: number;
   regularPrice: number;
   salePrice?: number;
   onSale: boolean;
   stockStatus: StockStatus;
-  stockQuantity?: number;
+  stockQuantity: number;
   categories: ProductCategory[];
   tags: ProductTag[];
   images: ProductImage[];
@@ -18,9 +18,9 @@ export interface Product {
   averageRating: number;
   reviewCount: number;
   featured: boolean;
-  sku: string;
-  createdAt: string;
-  updatedAt: string;
+  sku?: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface ProductCategory {
@@ -59,8 +59,11 @@ export type StockStatus = 'instock' | 'outofstock' | 'onbackorder';
 export interface CartItem {
   id: string;
   productId: string;
+  name: string;
+  price: number;
   quantity: number;
-  product: Product;
+  image?: string;
+  maxQuantity?: number;
 }
 
 export interface Cart {

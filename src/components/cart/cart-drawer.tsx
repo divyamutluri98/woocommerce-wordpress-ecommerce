@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useCartStore } from '@/lib/store';
+import { useCartStore } from '@/hooks/use-cart';
 import { formatPrice } from '@/lib/utils';
 
 export function CartDrawer() {
@@ -59,8 +59,8 @@ export function CartDrawer() {
                     >
                       <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-gray-100">
                         <Image
-                          src={item.product.images[0]?.src || '/api/placeholder/200/200'}
-                          alt={item.product.name}
+                          src={item.image || '/api/placeholder/200/200'}
+                          alt={item.name}
                           fill
                           className="object-cover"
                         />
@@ -68,14 +68,14 @@ export function CartDrawer() {
                       <div className="flex flex-1 flex-col justify-between">
                         <div>
                           <Link
-                            href={`/products/${item.product.slug}`}
+                            href={`/products/${item.productId}`}
                             onClick={closeCart}
                             className="font-medium line-clamp-1 hover:underline"
                           >
-                            {item.product.name}
+                             {item.name}
                           </Link>
                           <p className="text-sm text-muted-foreground">
-                            {formatPrice(item.product.price)}
+                             {formatPrice(item.price)}
                           </p>
                         </div>
                         <div className="flex items-center justify-between">

@@ -1,16 +1,17 @@
-# WordPress E-commerce Platform
+# E-commerce Platform - No API Keys Required
 
-A production-ready e-commerce platform integrated with WordPress WooCommerce.
+A fully functional standalone e-commerce platform with 150 products. **No external API keys needed** - works out of the box!
 
 ## Features
 
-- 🛒 Full shopping cart functionality
-- 💳 Stripe payment integration
-- 📦 Order management
-- 🔐 User authentication
-- 📱 Responsive design
-- ⚡ Fast static generation with Next.js
-- 🔌 WordPress WooCommerce integration via REST API
+- **150 products** across 5 categories (Electronics, Clothing, Home & Garden, Sports, Books)
+- Full shopping cart functionality with Zustand
+- Product search & filtering
+- Responsive design (mobile-friendly)
+- Checkout flow with order confirmation
+- Modern UI with Tailwind CSS & Radix UI
+- SEO optimized with sitemap & robots.txt
+- **Zero external dependencies** - runs completely standalone
 
 ## Quick Start
 
@@ -18,11 +19,9 @@ A production-ready e-commerce platform integrated with WordPress WooCommerce.
 # Install dependencies
 npm install
 
-# Set up environment variables
-cp .env.example .env.local
-
 # Run development server
 npm run dev
+# Open http://localhost:3000
 
 # Build for production
 npm run build
@@ -31,56 +30,86 @@ npm run build
 npm start
 ```
 
-## Environment Variables
-
-```env
-# WordPress
-WORDPRESS_API_URL=https://your-wordpress-site.com/wp-json/wc/v3
-WORDPRESS_CONSUMER_KEY=your_consumer_key
-WORDPRESS_CONSUMER_SECRET=your_consumer_secret
-
-# Stripe
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_xxx
-STRIPE_SECRET_KEY=sk_test_xxx
-STRIPE_WEBHOOK_SECRET=whsec_xxx
-
-# NextAuth
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your_nextauth_secret
-
-# Database (optional - for cart/orders)
-DATABASE_URL=postgresql://user:password@localhost:5432/ecommerce
-```
-
 ## Project Structure
 
 ```
-├── src/
-│   ├── app/                    # Next.js App Router
-│   │   ├── api/               # API routes
-│   │   ├── (shop)/           # Shop pages
-│   │   └── layout.tsx        # Root layout
-│   ├── components/            # React components
-│   │   ├── cart/             # Cart components
-│   │   ├── checkout/         # Checkout components
-│   │   ├── layout/           # Layout components
-│   │   ├── products/         # Product components
-│   │   └── ui/               # UI components
-│   ├── lib/                   # Utilities
-│   ├── hooks/                 # Custom hooks
-│   ├── types/                 # TypeScript types
-│   └── data/                  # Static product data
-├── public/                     # Static assets
-└── prisma/                     # Database schema
+src/
+├── app/                    # Next.js App Router pages
+│   ├── products/          # Product listings & details
+│   ├── checkout/          # Checkout page
+│   ├── api/              # Simple API routes
+│   └── page.tsx           # Homepage
+├── components/
+│   ├── products/         # ProductCard, ProductGrid, ProductDetails
+│   ├── cart/            # CartDrawer, CartButton
+│   ├── layout/          # Header, Footer
+│   └── ui/              # Button, Card, Input, Badge, Dialog
+├── lib/
+│   ├── store.ts         # Zustand cart store
+│   └── utils.ts         # Utilities
+├── data/
+│   └── products.ts      # 150 pre-loaded products
+└── types/
+    └── product.ts       # TypeScript types
 ```
+
+## Tech Stack
+
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Utility-first CSS
+- **Zustand** - Lightweight state management
+- **Radix UI** - Accessible UI primitives
+- **Lucide React** - Beautiful icons
+
+## How It Works
+
+1. **Products**: 150 products are pre-loaded in `src/data/products.ts` - no database needed
+2. **Cart**: Uses browser localStorage via Zustand persist - cart survives page refresh
+3. **Checkout**: Simple order form that confirms orders locally (no payment processing)
+4. **Search & Filter**: All filtering happens client-side with local data
+
+## Customization
+
+- Edit products in `src/data/products.ts`
+- Customize colors in `tailwind.config.ts`
+- Modify layout in `src/components/layout/`
+- Add more categories or filtering options
 
 ## Deployment
 
-Deploy to Vercel:
+Deploy to any static hosting:
 
+### Vercel (Recommended)
 ```bash
 vercel
 ```
+
+### Docker
+```bash
+docker build -t ecommerce .
+docker run -p 3000:3000 ecommerce
+```
+
+### Manual
+```bash
+npm run build
+npm start
+```
+
+## Notes
+
+This is a **standalone demo platform** perfect for:
+- Testing and development
+- Learning Next.js & React
+- Template for custom projects
+- Portfolio showcase
+
+For production with real payments and backend integration, you would need:
+- Stripe account for payment processing
+- Backend API for orders
+- Database for persistent orders
+- WordPress/WooCommerce if needed
 
 ## License
 
