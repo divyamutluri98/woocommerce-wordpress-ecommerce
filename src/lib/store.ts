@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import type { Product, CartItem } from '@/types/product';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import type { Product, CartItem } from "@/types/product";
 
 interface CartState {
   items: CartItem[];
@@ -21,17 +21,19 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
       isOpen: false,
-      
+
       addItem: (product: Product, quantity = 1) => {
         const items = get().items;
-        const existingItem = items.find((item) => item.productId === product.id);
-        
+        const existingItem = items.find(
+          (item) => item.productId === product.id,
+        );
+
         if (existingItem) {
           set({
             items: items.map((item) =>
               item.productId === product.id
                 ? { ...item, quantity: item.quantity + quantity }
-                : item
+                : item,
             ),
           });
         } else {
@@ -48,13 +50,13 @@ export const useCartStore = create<CartState>()(
           });
         }
       },
-      
+
       removeItem: (productId: string) => {
         set({
           items: get().items.filter((item) => item.productId !== productId),
         });
       },
-      
+
       updateQuantity: (productId: string, quantity: number) => {
         if (quantity <= 0) {
           get().removeItem(productId);
@@ -62,30 +64,30 @@ export const useCartStore = create<CartState>()(
         }
         set({
           items: get().items.map((item) =>
-            item.productId === productId ? { ...item, quantity } : item
+            item.productId === productId ? { ...item, quantity } : item,
           ),
         });
       },
-      
+
       clearCart: () => set({ items: [] }),
-      
+
       toggleCart: () => set({ isOpen: !get().isOpen }),
       openCart: () => set({ isOpen: true }),
       closeCart: () => set({ isOpen: false }),
-      
+
       getItemCount: () => {
         return get().items.reduce((total, item) => total + item.quantity, 0);
       },
-      
+
       getSubtotal: () => {
         return get().items.reduce(
           (total, item) => total + item.product.price * item.quantity,
-          0
+          0,
         );
       },
     }),
     {
-      name: 'ecommerce-cart',
-    }
-  )
+      name: "ecommerce-cart",
+    },
+  ),
 );
